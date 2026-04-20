@@ -1,0 +1,155 @@
+@import "tailwindcss";
+
+@theme {
+  --color-phaser-cyan: #00D4FF;
+  --color-phaser-purple: #6C3FE8;
+  --color-phaser-magenta: #E840E0;
+  --color-phaser-bg: #0A0A1A;
+  --color-phaser-surface: #111128;
+  --color-phaser-text: #F0F0FF;
+  --color-phaser-muted: #8888AA;
+}
+
+/* Dark theme (default) */
+:root {
+  --color-bg: #0A0A1A;
+  --color-surface: #111128;
+  --color-primary: #00D4FF;
+  --color-accent: #6C3FE8;
+  --color-magenta: #E840E0;
+  --color-text: #F0F0FF;
+  --color-muted: #8888AA;
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-hover: rgba(255, 255, 255, 0.1);
+  --color-code-bg: #0d0d1f;
+}
+
+/* Light theme */
+.light {
+  --color-bg: #F8F9FC;
+  --color-surface: #FFFFFF;
+  --color-primary: #0099CC;
+  --color-accent: #5C2FD8;
+  --color-magenta: #C030C0;
+  --color-text: #1A1A2E;
+  --color-muted: #6B7280;
+  --color-border: rgba(0, 0, 0, 0.1);
+  --color-hover: rgba(0, 0, 0, 0.05);
+  --color-code-bg: #F1F5F9;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: 'Inter', sans-serif;
+}
+
+h1, h2, h3 {
+  font-family: 'Orbitron', sans-serif;
+}
+
+code, pre, kbd {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.glow-cyan {
+  text-shadow: 0 0 20px rgba(0, 212, 255, 0.5), 0 0 40px rgba(0, 212, 255, 0.2);
+}
+
+.chapter-content h2 {
+  font-family: 'Orbitron', sans-serif;
+  color: var(--color-primary);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  scroll-margin-top: 5rem;
+}
+
+.chapter-content h3 {
+  font-family: 'Orbitron', sans-serif;
+  color: var(--color-text);
+  font-size: 1.25rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  scroll-margin-top: 5rem;
+}
+
+.chapter-content p {
+  line-height: 1.8;
+  margin-bottom: 1rem;
+  color: var(--color-text);
+}
+
+.chapter-content pre {
+  background: var(--color-code-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+.chapter-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+
+.chapter-content th {
+  background: var(--color-surface);
+  color: var(--color-primary);
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.75rem;
+}
+
+.chapter-content td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.chapter-content ul, .chapter-content ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.chapter-content li {
+  margin-bottom: 0.5rem;
+  line-height: 1.7;
+}
+
+.chapter-content a {
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
+.chapter-content code:not(pre code) {
+  color: var(--color-primary);
+  font-weight: 600;
+  font-size: 0.9em;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.chapter-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  margin: 1.5rem 0;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+@keyframes confetti-fall {
+  0% { transform: translateY(-100%) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+
+.confetti-piece {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  animation: confetti-fall 3s ease-in forwards;
+  pointer-events: none;
+}

@@ -1,0 +1,37 @@
+{
+  "name": "site",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@nuxt/content": "^3.13.0",
+    "@nuxt/ui": "4.6.1",
+    "@vueuse/core": "^14.2.1",
+    "nuxt": "^4.4.2",
+    "rehype-external-links": "^3.0.0",
+    "vue": "^3.5.32",
+    "vue-router": "^5.0.4"
+  },
+  "devDependencies": {
+    "@nuxt/test-utils": "^4.0.2",
+    "better-sqlite3": "^12.9.0",
+    "happy-dom": "^20.9.0",
+    "tailwindcss": "^4.2.2",
+    "vitest": "^4.1.4"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@parcel/watcher",
+      "better-sqlite3",
+      "esbuild",
+      "vue-demi"
+    ]
+  }
+}
