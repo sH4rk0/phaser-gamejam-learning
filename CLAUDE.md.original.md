@@ -1,6 +1,10 @@
 # CLAUDE.md
 
-Project: Phaser 4 Game Dev Italian-language learning site. Static, chapter-based course covering Phaser.js v4.0. Spec in [prompt.md](prompt.md). Nuxt project must be created from spec.
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## Project Overview
+
+This repository contains the specification and assets for a **Phaser 4 Game Dev** Italian-language learning website — a static, chapter-based course covering Phaser.js v4.0. The main spec is in [prompt.md](prompt.md). The actual Nuxt project must be created from that spec.
 
 ## Tech Stack
 
@@ -80,18 +84,18 @@ content/
     └── N-slug.md                      # Chapter Markdown content (12 chapters)
 ```
 
-### Key Nuxt UI Components
+### Key Nuxt UI Components Used
 
-- `UNavigationMenu` — navbar + chapter dropdown
-- `UAccordion` — collapsible sidebar on mobile
+- `UNavigationMenu` — navbar and chapter dropdown
+- `UAccordion` — collapsible sidebar sections on mobile
 - `UCard` — chapter cards, quiz cards, info boxes
-- `UBadge` — difficulty badges
-- `UProgress` — sidebar completion bar
+- `UBadge` — difficulty level badges
+- `UProgress` — sidebar completion progress bar
 - `UButton`, `UIcon`, `UTooltip`
 
 ### Content Model
 
-Chapters: Markdown under `content/chapters/`. Front matter:
+Chapters are Markdown files under `content/chapters/`. Each chapter has front matter:
 ```yaml
 ---
 title: "..."
@@ -102,28 +106,28 @@ readingTime: "~15 min"
 ---
 ```
 
-Quiz data in `data/quiz/chapter-N.ts`: typed arrays with `question`, `options[]`, `correct` index.
+Quiz data lives in `data/quiz/chapter-N.ts` as typed arrays with `question`, `options[]`, and `correct` index.
 
 ### State Management
 
-No Pinia. State in two composables backed by `useLocalStorage` from `@vueuse/core`:
-- `useChapterProgress()` — tracks completed chapters
+No Pinia — state lives in two composables backed by `useLocalStorage` from `@vueuse/core`:
+- `useChapterProgress()` — tracks which chapters are marked complete
 - `useQuizState()` — stores score per chapter
 
 ## Visual Identity
 
-- **Background**: `#0A0A1A`
+- **Background**: `#0A0A1A` (near-black)
 - **Surface**: `#111128`
 - **Primary**: `#00D4FF` (cyan)
 - **Accent**: `#6C3FE8` (violet), `#E840E0` (magenta)
 - **Text**: `#F0F0FF` / `#8888AA`
 - **Fonts**: Orbitron/Exo 2 (titles), Inter/DM Sans (body), JetBrains Mono/Fira Code (code)
 - Dark theme default; light mode toggle optional
-- Logo: `phaser4-logo.webp` (repo root)
+- Logo asset: `phaser4-logo.webp` (provided in repo root)
 
 ## Content Language
 
-All user-facing text, chapter content, UI labels: **Italian**.
+All user-facing text, chapter content, and UI labels must be in **Italian**.
 
 ## Chapters (12 total)
 

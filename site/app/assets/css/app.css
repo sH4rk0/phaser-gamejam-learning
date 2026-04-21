@@ -141,6 +141,19 @@ code, pre, kbd {
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
+.tutor-bubble p,
+.tutor-bubble li,
+.tutor-bubble strong,
+.tutor-bubble em {
+  color: #111B21 !important;
+  line-height: 1.7;
+  margin-bottom: 0.5rem;
+}
+
+.tutor-bubble a {
+  color: #00A884 !important;
+}
+
 @keyframes confetti-fall {
   0% { transform: translateY(-100%) rotate(0deg); opacity: 1; }
   100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }

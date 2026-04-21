@@ -172,8 +172,8 @@ const quizMap: Record<string, QuizQuestion[]> = {
   '2-il-template': quiz2,
   '3-typescript-basi': quiz3,
   '4-configurazione-gioco': quiz4,
-  '5-gameobjects': quiz5,
-  '6-animazioni-audio-tempo': quiz6,
+  '5-1-gameobjects-intro': quiz5,
+  '6-1-animazioni': quiz6,
   '7-camera': quiz7,
 }
 

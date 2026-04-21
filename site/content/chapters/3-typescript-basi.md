@@ -666,3 +666,14 @@ Per un approfondimento su TypeScript è possibile consultare il manuale ufficial
 ::
 
 Nel prossimo capitolo inizieremo a **configurare il nostro gioco** con Phaser 4 e a esplorare il sistema a scene.
+
+::InfoBox{type="tutor" avatar="/images/francesco-raimondo.jpg"}
+
+Sì, lo so. Questo capitolo sembrava quell'esame universitario per cui non ti senti mai abbastanza pronto. Tipi, interfacce, classi, getter, setter, import, export... è tanto.
+
+Ma sai una cosa? Nei prossimi capitoli userai il **30% di tutto questo per l'80% del tempo**. Il resto lo rileggerai qui quando ne avrai bisogno — e averne bisogno è normale.
+
+Quello che devi portarti a casa adesso è questo: TypeScript ti urla in faccia *prima* che il gioco parta quando fai qualcosa di sbagliato. Questo è un superpotere, non una scocciatura. Le classi hanno un costruttore, proprietà private con `_` davanti, e metodi che fanno le cose. Import ed export tengono tutto organizzato.
+
+Il resto viene da sé con la pratica. Promesso. 💪
+::

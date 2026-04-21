@@ -376,3 +376,17 @@ this._mainCamera.fadeOut(500, 0, 0, 0, () => {
 - [Effects.Shake](https://docs.phaser.io/api-documentation/class/cameras-scene2d-effects-shake)
 - [Effects.Fade](https://docs.phaser.io/api-documentation/class/cameras-scene2d-effects-fade)
 ::
+
+::PhaserLabsBox{url="https://labs.phaser.io/?path=camera"}
+::
+
+::InfoBox{type="tutor" avatar="/images/francesco-raimondo.jpg"}
+
+La camera è uno di quei sistemi che all'inizio sembra superfluo — "tanto il mio gioco si vede tutto sullo schermo" — e poi diventa indispensabile nel secondo esatto in cui provi `startFollow` sul tuo personaggio. Da quel momento non puoi più farne a meno.
+
+Tre effetti che da soli elevano qualsiasi gioco di un livello: **flash** quando il giocatore subisce un danno, **shake** quando c'è un'esplosione, **fadeOut** per passare a una nuova scena. Sono cinque righe di codice ciascuno e fanno un effetto enorme.
+
+**Tip pro**: `fadeOut` nella callback con `this.scene.start('NomeScena')` è il modo elegante di fare le transizioni. Niente tagli bruschi — i giocatori lo notano sempre.
+
+`worldView` lo userai appena il tuo mondo diventa più grande dello schermo: spawn dei nemici ai bordi, distruzione degli oggetti usciti dalla vista. Roba che ottimizza davvero le performance. 🎬
+::

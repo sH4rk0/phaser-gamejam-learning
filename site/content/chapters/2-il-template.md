@@ -315,3 +315,14 @@ In questo capitolo abbiamo:
 - ✅ Imparato a creare la build di produzione
 
 Nel prossimo capitolo inizieremo a esplorare le **basi di TypeScript**, il linguaggio che utilizzeremo per scrivere il codice del nostro gioco.
+
+::InfoBox{type="tutor" avatar="/images/francesco-raimondo.jpg"}
+
+Ok, ho sentito girare gli occhi quando hai visto quella struttura di cartelle. Lo so. Sembra tantissima roba.
+
+Ma ti svelo un segreto: nel 90% dello sviluppo userai solo tre cose — `npm run start`, il file `GameData.ts` per aggiungere assets, e il metodo `create()` della scena `GamePlay`. Il resto è lì, ma puoi ignorarlo finché non ti serve.
+
+L'unica cosa davvero fondamentale: **esegui sempre `npm install` la prima volta** che apri il progetto. Dimentichi quello e ti ritrovi a fissare errori misteriosi per mezz'ora.
+
+Il server si avvia, il browser si apre, vedi la schermata del template — sei a posto. A presto! 🚀
+::

@@ -256,3 +256,14 @@ private updateScore(parameters: Array<any>): void {
 ::InfoBox{type="new"}
 Il sistema a scene di Phaser è uno dei suoi punti di forza: ogni scena è isolata e riutilizzabile, ma può comunicare con le altre tramite registry, dati di start o eventi.
 ::
+
+::InfoBox{type="tutor" avatar="/images/francesco-raimondo.jpg"}
+
+Eccoci. Il capitolo delle scene. Sei sopravvissuto anche a questo.
+
+La verità è che il flusso è sempre lo stesso: Boot → Preloader → Intro → GamePlay → GameOver. **Tu lavorerai quasi sempre su `GamePlay.ts`** e ogni tanto toccherai `Hud.ts` per aggiornare punteggio e vite. Le altre scene le toccherai raramente.
+
+I metodi `constructor`, `preload`, `create` e `update` sono il ritmo del tuo gioco — impararli a memoria ti cambia la vita. Il `registry` è il modo più semplice per passare dati tra scene; usalo senza sensi di colpa.
+
+La comunicazione con gli eventi (`emit` / `on`) sembra magia la prima volta. Poi diventa il tuo strumento preferito. Fidati. 🎮
+::

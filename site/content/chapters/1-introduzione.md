@@ -171,4 +171,14 @@ Riferimento ufficiale: [code.visualstudio.com](https://code.visualstudio.com/)
 
 ---
 
-Sei pronto per iniziare! Nel prossimo capitolo esploreremo la struttura del template e configureremo l'ambiente di sviluppo completo.
+
+::InfoBox{type="tutor" avatar="/images/francesco-raimondo.jpg"}
+
+Ok, lo so — hai appena letto di Node.js, npm, Webpack, TypeScript, Firebase e Phaser 4 tutto d'un fiato. Sembra tanto, vero?
+
+Respira. Non devi diventare esperto di nessuna di queste tecnologie adesso.
+
+Pensa a questo capitolo come alla presentazione dei protagonisti del film: li hai visti in faccia, sai i loro nomi, e ora puoi andare avanti. Durante il corso li incontrerai uno alla volta, nel contesto giusto, e tutto comincerà ad avere senso.
+
+L'unica cosa che ti chiedo per ora: **assicurati di avere Node.js installato**. Il resto viene da sé. Ci vediamo al prossimo capitolo! 🚀
+::
