@@ -128,6 +128,38 @@ export const chapters: Chapter[] = [
     difficulty: 'intermediate',
     readingTime: '~30 min',
     available: true,
+  },
+  {
+    id: 8,
+    slug: '8-fisica-arcade',
+    title: 'La Fisica Arcade',
+    difficulty: 'intermediate',
+    readingTime: '~35 min',
+    available: true,
+  },
+  {
+    id: 9,
+    slug: '9-gameobjects-specializzati',
+    title: 'I Nostri GameObjects Specializzati',
+    difficulty: 'intermediate',
+    readingTime: '~35 min',
+    available: true,
+  },
+  {
+    id: 10,
+    slug: '10-tilemaps',
+    title: 'Tilemaps',
+    difficulty: 'intermediate',
+    readingTime: '~40 min',
+    available: true,
+  },
+  {
+    id: 11,
+    slug: '11-input',
+    title: 'Input Handling',
+    difficulty: 'intermediate',
+    readingTime: '~25 min',
+    available: true,
   }
 ]
 

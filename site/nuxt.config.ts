@@ -15,6 +15,9 @@ export default defineNuxtConfig({
     },
   },
   nitro: {
+    output: {
+      publicDir: '../public',
+    },
     prerender: {
       routes: ['/'],
       crawlLinks: true,
@@ -22,21 +25,7 @@ export default defineNuxtConfig({
     },
   },
   icon: {
-    clientBundle: {
-      icons: [
-        'heroicons:book-open',
-        'heroicons:clock',
-        'heroicons:trophy',
-        'heroicons:currency-dollar',
-        'heroicons:lock-closed',
-        'heroicons:document-magnifying-glass',
-        'heroicons:check-circle',
-        'heroicons:chevron-left',
-        'heroicons:chevron-right',
-        'simple-icons:linkedin',
-        'simple-icons:facebook',
-      ],
-    },
+    provider: 'iconify',
   },
   colorMode: {
     preference: 'dark',
