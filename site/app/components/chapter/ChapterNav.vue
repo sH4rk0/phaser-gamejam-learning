@@ -4,11 +4,13 @@
       <component
         :is="prev && prev.available ? NuxtLink : 'span'"
         v-if="prev"
-        v-bind="prev.available ? { to: `/capitoli/${prev.slug}` } : {}"
+        v-bind="prev.available ? { to: `/${locale}/${sectionPath}/${prev.slug}` } : {}"
         class="flex flex-col gap-1 group"
         :class="{ 'opacity-40': prev && !prev.available }"
       >
-        <span class="text-xs" style="color: var(--color-muted);">← Precedente</span>
+        <span class="text-xs" style="color: var(--color-muted);">
+          {{ locale === 'en' ? '← Previous' : '← Precedente' }}
+        </span>
         <span class="text-sm font-semibold group-hover:underline" style="color: var(--color-text);">
           {{ prev.title }}
         </span>
@@ -19,11 +21,13 @@
       <component
         :is="next && next.available ? NuxtLink : 'span'"
         v-if="next"
-        v-bind="next.available ? { to: `/capitoli/${next.slug}` } : {}"
+        v-bind="next.available ? { to: `/${locale}/${sectionPath}/${next.slug}` } : {}"
         class="flex flex-col items-end gap-1 group"
         :class="{ 'opacity-40': next && !next.available }"
       >
-        <span class="text-xs" style="color: var(--color-muted);">Successivo →</span>
+        <span class="text-xs" style="color: var(--color-muted);">
+          {{ locale === 'en' ? 'Next →' : 'Successivo →' }}
+        </span>
         <span class="text-sm font-semibold group-hover:underline" style="color: var(--color-text);">
           {{ next.title }}
         </span>
@@ -36,11 +40,12 @@
 import { getPrevChapter, getNextChapter } from '~/data/chapters'
 
 const NuxtLink = resolveComponent('NuxtLink')
+const { locale, sectionPath } = useLocale()
 
 const props = defineProps<{
   currentSlug: string
 }>()
 
-const prev = computed(() => getPrevChapter(props.currentSlug))
-const next = computed(() => getNextChapter(props.currentSlug))
+const prev = computed(() => getPrevChapter(props.currentSlug, locale.value))
+const next = computed(() => getNextChapter(props.currentSlug, locale.value))
 </script>

@@ -6,8 +6,6 @@ difficulty: "intermediate"
 readingTime: "~35 min"
 ---
 
-# I Nostri GameObjects Specializzati
-
 In questo capitolo vedremo come estendere la classe `Phaser.GameObject.Sprite` per creare le nostre classi specializzate, alle quali assegneremo dei comportamenti peculiari.
 
 Nella cartella `src` del nostro progetto template creeremo una folder che chiameremo `gameComponents`. Questo nome è arbitrario, la potremmo chiamare anche `customGameObjects` oppure `customClasses` o come più ci piace. Questa cartella sarà il contenitore delle nostre classi custom. All'interno di questa cartella creeremo tante folder quanti sono le classi custom che useremo nel nostro gioco.

@@ -112,23 +112,18 @@ this._myObject.setAngle(45);           // 45 gradi
 this._myObject.setRotation(Math.PI);   // 180 gradi in radianti
 ```
 
-### .setTint / .setTintFill / .clearTint
+### .setTint / .setTintMode / .clearTint
 
-`setTint` applica una **tinta additiva**: moltiplica il colore di ogni pixel della texture per il valore passato. Accetta un singolo colore esadecimale.
+`setTint` imposta il colore della tinta. Accetta un singolo colore esadecimale oppure quattro valori per colorare i singoli angoli del gameObject.
 
 ```typescript
 this._sprite.setTint(0xff6600);
+
+// angoli diversi
+this._sprite.setTint(0xff0000, 0x00ff00, 0x0000ff, 0xffffff);
 ```
 
-![Esempio setTint: tinta additiva applicata a tre robot](/images/chapters/cap5/setTint.png)
-
-`setTintFill` **sostituisce** i colori dei pixel invece di moltiplicarli — utile per effetti come il "flash bianco" quando un personaggio viene colpito.
-
-```typescript
-this._sprite.setTintFill(0xffffff); // personaggio tutto bianco
-```
-
-![Esempio setTintFill: sostituzione completa dei colori](/images/chapters/cap5/setTintFill.png)
+![Esempio setTint: tinta applicata a tre robot](/images/chapters/cap5/setTint.png)
 
 `clearTint` rimuove qualsiasi tinta applicata:
 
@@ -136,21 +131,113 @@ this._sprite.setTintFill(0xffffff); // personaggio tutto bianco
 this._sprite.clearTint();
 ```
 
-Per colorare i **singoli angoli** del gameObject usa le proprietà dirette:
+Per colorare i **singoli angoli** tramite proprietà dirette:
 
 ```typescript
-this._sprite.tintTopLeft    = 0xff0000;
-this._sprite.tintTopRight   = 0x00ff00;
-this._sprite.tintBottomLeft = 0x0000ff;
+this._sprite.tintTopLeft     = 0xff0000;
+this._sprite.tintTopRight    = 0x00ff00;
+this._sprite.tintBottomLeft  = 0x0000ff;
 this._sprite.tintBottomRight = 0xffffff;
 ```
 
-La proprietà `tintFill` (boolean) permette di alternare tra le due modalità senza chiamare metodi:
+### .setTintMode(mode)
+
+Controlla come la tinta viene applicata alla texture. In Phaser 4 il colore e la modalità di blending sono operazioni separate.
 
 ```typescript
-this._sprite.tintFill = true;  // modalità fill (sostituisce i colori)
-this._sprite.tintFill = false; // modalità additiva (default)
+this._sprite.setTintMode(Phaser.TintModes.FILL);
 ```
+
+Oppure tramite la proprietà diretta:
+
+```typescript
+this._sprite.tintMode = Phaser.TintModes.MULTIPLY;
+```
+
+**Modalità disponibili (`Phaser.TintModes`):**
+
+| TintMode | Effetto |
+|---|---|
+| `MULTIPLY` | Moltiplica i canali RGB: default, effetto tinta classico |
+| `FILL` | Sostituisce completamente i colori dei pixel — utile per "flash bianco" quando il personaggio viene colpito |
+| `ADD` | Somma i canali RGB: effetto luminoso, bagliore |
+| `SCREEN` | Inverso di multiply: schiarisce i pixel |
+| `OVERLAY` | Combina multiply e screen in base alla luminosità base |
+| `HARD_LIGHT` | Come overlay ma con sorgente e destinazione invertite |
+
+Esempio — flash bianco al danno:
+
+```typescript
+// v3 (rimosso in v4)
+// this._sprite.setTintFill(0xffffff);
+
+// v4
+this._sprite.setTint(0xffffff).setTintMode(Phaser.TintModes.FILL);
+```
+
+![Esempio FILL mode: sostituzione completa dei colori](/images/chapters/cap5/setTintFill.png)
+
+::info-box{type="new"}
+In Phaser 4, `setTintFill()` e la proprietà `tintFill` sono stati rimossi. Usa `setTintMode(Phaser.TintModes.FILL)` in sostituzione. La modalità `FILL` ora gestisce correttamente i valori di alpha parziali.
+::
+
+### .setBlendMode(mode)
+
+Controlla come i pixel del gameObject si combinano con quelli già disegnati sotto. Default: `Phaser.BlendModes.NORMAL` (nessun effetto).
+
+```typescript
+this._myObject.setBlendMode(Phaser.BlendModes.ADD);
+```
+
+Oppure tramite la proprietà diretta:
+
+```typescript
+this._myObject.blendMode = Phaser.BlendModes.MULTIPLY;
+```
+
+**Modalità disponibili:**
+
+| BlendMode | Effetto |
+|---|---|
+| `NORMAL` | Default — nessun blending |
+| `ADD` | Somma i canali RGB: effetto luce, bagliore, esplosione |
+| `MULTIPLY` | Moltiplica i colori: scurisce, effetto ombra |
+| `SCREEN` | Inverso di multiply: schiarisce, effetto schermo proiettato |
+| `OVERLAY` | Combina multiply e screen in base alla luminosità |
+| `ERASE` | Cancella pixel dalla destinazione (solo su RenderTexture) |
+| `SOURCE_IN` | Mostra solo l'intersezione (solo Canvas) |
+| `SOURCE_OUT` | Mostra solo la parte fuori dall'intersezione (solo Canvas) |
+| `SOURCE_ATOP` | Sovrappone rispettando l'alpha della destinazione (solo Canvas) |
+| `DESTINATION_OVER` | Disegna sotto la destinazione esistente (solo Canvas) |
+| `DESTINATION_IN` | Mantiene solo l'intersezione (solo Canvas) |
+| `DESTINATION_OUT` | Mantiene solo la parte fuori (solo Canvas) |
+| `DESTINATION_ATOP` | Inverso di source-atop (solo Canvas) |
+| `LIGHTER` | Come ADD ma limitato ai valori [0, 1] (solo Canvas) |
+| `COPY` | Sovrascrive completamente la destinazione (solo Canvas) |
+| `XOR` | XOR bit a bit sull'alpha (solo Canvas) |
+
+::info-box{type="warning"}
+Le modalità contrassegnate come *solo Canvas* non funzionano con il renderer WebGL. `ADD`, `MULTIPLY`, `SCREEN` e `NORMAL` funzionano su entrambi.
+::
+
+::info-box{type="tip"}
+`ADD` è la scelta più comune per effetti particellari, esplosioni e power-up luminosi. `MULTIPLY` per ombre e overlay atmosferici.
+::
+
+**Supporto per tipo di gameObject:**
+
+| GameObject | WebGL | Canvas |
+|---|---|---|
+| `Image`, `Sprite`, `TileSprite` | Tutti i mode WebGL | Tutti i mode Canvas |
+| `Text` | `NORMAL`, `ADD`, `MULTIPLY`, `SCREEN` | Tutti |
+| `Graphics` | `NORMAL`, `ADD` | Tutti |
+| `RenderTexture` | Tutti + `ERASE` | Tutti |
+| `Container` | Eredita dal renderer | Eredita dal renderer |
+| `Group` | Non supportato direttamente | Non supportato direttamente |
+
+::info-box{type="new"}
+In Phaser 4, puoi passare anche una stringa CSS blend mode direttamente: `setBlendMode('multiply')`. Phaser la mappa automaticamente alla costante interna corrispondente.
+::
 
 ### .setFlip(x, y)
 
@@ -163,6 +250,22 @@ this._myObject.setFlip(true, false);
 
 ::InfoBox{type="warning"}
 Il flip è puramente visivo: non modifica i valori di posizione né il corpo fisico (physics body).
+::
+
+### vertexRoundMode
+
+Controlla se e quando le coordinate dei vertici vengono arrotondate al pixel intero. Utile per eliminare l'aliasing su oggetti pixel-art allineati agli assi.
+
+```typescript
+this._myObject.vertexRoundMode = "off";      // mai arrotondare
+this._myObject.vertexRoundMode = "safe";     // solo se nessuna scala/rotazione
+this._myObject.vertexRoundMode = "safeAuto"; // safe, solo se camera ha roundPixels (default)
+this._myObject.vertexRoundMode = "full";     // sempre (può causare wobble su oggetti ruotati)
+this._myObject.vertexRoundMode = "fullAuto"; // full, solo se camera ha roundPixels
+```
+
+::info-box{type="new"}
+In Phaser 4, `roundPixels` è `false` per default (era `true` in v3). La proprietà `vertexRoundMode` sostituisce il vecchio flag globale con controllo granulare per oggetto.
 ::
 
 ### .setScrollFactor(x, y)

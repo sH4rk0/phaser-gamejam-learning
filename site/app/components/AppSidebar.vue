@@ -11,14 +11,14 @@
       class="text-xs font-bold mb-4 tracking-widest uppercase"
       style="color: var(--color-muted); font-family: 'Orbitron', sans-serif;"
     >
-      Capitoli
+      {{ locale === 'en' ? 'Chapters' : 'Capitoli' }}
     </p>
 
-    <nav class="flex-1 space-y-1" aria-label="Capitoli">
-      <div v-for="chapter in chapters" :key="chapter.slug">
+    <nav class="flex-1 space-y-1" :aria-label="locale === 'en' ? 'Chapters' : 'Capitoli'">
+      <div v-for="chapter in localChapters" :key="chapter.slug">
         <component
           :is="chapter.available ? NuxtLink : 'span'"
-          v-bind="chapter.available ? { to: `/capitoli/${chapter.slug}` } : {}"
+          v-bind="chapter.available ? { to: `/${locale}/${sectionPath}/${chapter.slug}` } : {}"
           class="flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors"
           :style="{
             color: isCurrentChapter(chapter.slug) ? 'var(--color-primary)' : 'var(--color-text)',
@@ -75,7 +75,7 @@
 
 <script setup lang="ts">
 import { NuxtLink } from '#components'
-import { chapters } from '~/data/chapters'
+import { getChapters } from '~/data/chapters'
 
 interface TocItem {
   id: string
@@ -87,8 +87,12 @@ defineProps<{
   toc?: TocItem[]
   activeId?: string
 }>()
+
 const route = useRoute()
 const { isComplete } = useChapterProgress()
+const { locale, sectionPath } = useLocale()
+
+const localChapters = computed(() => getChapters(locale.value))
 
 const mounted = ref(false)
 onMounted(() => {

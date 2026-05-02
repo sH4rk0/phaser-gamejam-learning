@@ -55,6 +55,24 @@ update(time: number, delta: number): void {
 La texture di una TileSprite deve essere progettata in modo da potersi ripetere senza interruzioni visibili sul bordo sinistro e destro (texture tileable).
 ::
 
+### Proprietà aggiuntive
+
+**`tileRotation`** — ruota la texture ripetuta (in radianti). Nuovo in Phaser 4.
+
+```typescript
+this._tile1.tileRotation = Math.PI / 4; // 45 gradi
+```
+
+Combinato con `tilePositionX`/`tilePositionY` nell'`update()`, permette sfondi con texture che scorrono in diagonale o ruotano.
+
+::info-box{type="new"}
+In Phaser 4, TileSprite supporta frame all'interno di atlas e spritesheet — in v3 poteva ripetere solo la texture intera. Supporta anche texture compresse e dimensioni non potenze di 2.
+::
+
+::info-box{type="warning"}
+In Phaser 4, il **crop** della texture su TileSprite è stato rimosso. Se usavi `setCrop()` su una TileSprite, devi trovare un'alternativa (es. mask o RenderTexture).
+::
+
 ::PhaserLabsBox{url="https://labs.phaser.io/?path=game+objects%2Ftile+sprite"}
 ::
 

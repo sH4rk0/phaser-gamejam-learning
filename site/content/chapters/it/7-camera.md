@@ -259,11 +259,15 @@ Queste proprietà sono utili per **fare spawn** di nemici o oggetti ai bordi del
 ### Punto random nel viewport
 
 ```typescript
-const rndPoint: Phaser.Geom.Point = this.cameras.main.worldView.getRandomPoint();
+const rndPoint: Phaser.Math.Vector2 = this.cameras.main.worldView.getRandomPoint();
 console.log(rndPoint.x, rndPoint.y);
 ```
 
 Utile per far apparire bonus o nemici in una posizione casuale all'interno della vista corrente.
+
+::info-box{type="new"}
+In Phaser 4, `Geom.Point` è stato rimosso. `getRandomPoint()` restituisce ora un `Phaser.Math.Vector2`. Aggiorna i type annotation di conseguenza.
+::
 
 ### Controllare se un oggetto è nel viewport
 

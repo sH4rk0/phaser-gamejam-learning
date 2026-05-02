@@ -1,15 +1,17 @@
 <template>
   <div class="mb-8">
     <nav class="flex items-center gap-2 text-sm mb-4" style="color: var(--color-muted);">
-      <NuxtLink to="/" class="hover:underline" style="color: var(--color-muted);">Home</NuxtLink>
+      <NuxtLink :to="`/${locale}`" class="hover:underline" style="color: var(--color-muted);">Home</NuxtLink>
       <UIcon name="i-heroicons-chevron-right" class="w-4 h-4" />
-      <NuxtLink to="/capitoli" class="hover:underline" style="color: var(--color-muted);">Capitoli</NuxtLink>
+      <NuxtLink :to="`/${locale}/${sectionPath}`" class="hover:underline" style="color: var(--color-muted);">
+        {{ locale === 'en' ? 'Chapters' : 'Capitoli' }}
+      </NuxtLink>
       <UIcon name="i-heroicons-chevron-right" class="w-4 h-4" />
-      <span style="color: var(--color-text);">Capitolo {{ chapter }}</span>
+      <span style="color: var(--color-text);">{{ locale === 'en' ? 'Chapter' : 'Capitolo' }} {{ chapter }}</span>
     </nav>
 
     <p class="text-sm font-bold mb-2" style="color: var(--color-primary); font-family: 'Orbitron', sans-serif; letter-spacing: 0.2em;">
-      CAPITOLO {{ chapter }}
+      {{ locale === 'en' ? 'CHAPTER' : 'CAPITOLO' }} {{ chapter }}
     </p>
 
     <h1
@@ -20,7 +22,7 @@
     </h1>
 
     <div class="flex flex-wrap items-center gap-3">
-      <span 
+      <span
         class="px-3 py-1 text-xs font-semibold rounded-full"
         :style="{
           backgroundColor: difficultyBg,
@@ -47,9 +49,7 @@ const props = defineProps<{
   readingTime: string
 }>()
 
-const difficultyColor = computed(() => {
-  return { beginner: 'success', intermediate: 'warning', advanced: 'error' }[props.difficulty] as 'success' | 'warning' | 'error'
-})
+const { locale, sectionPath } = useLocale()
 
 const difficultyBg = computed(() => {
   return { beginner: 'rgba(16, 185, 129, 0.2)', intermediate: 'rgba(245, 158, 11, 0.2)', advanced: 'rgba(239, 68, 68, 0.2)' }[props.difficulty]
@@ -60,6 +60,9 @@ const difficultyText = computed(() => {
 })
 
 const difficultyLabel = computed(() => {
+  if (locale.value === 'en') {
+    return { beginner: 'Beginner', intermediate: 'Intermediate', advanced: 'Advanced' }[props.difficulty]
+  }
   return { beginner: 'Principiante', intermediate: 'Intermedio', advanced: 'Avanzato' }[props.difficulty]
 })
 </script>

@@ -4,6 +4,9 @@ export default defineNuxtConfig({
   modules: ['@nuxt/ui', '@nuxt/content'],
   css: ['~/assets/css/app.css'],
   ssr: true,
+  experimental: {
+    payloadExtraction: false,
+  },
   content: {
     build: {
       markdown: {
@@ -19,7 +22,7 @@ export default defineNuxtConfig({
       publicDir: '../public',
     },
     prerender: {
-      routes: ['/'],
+      routes: ['/', '/it', '/en'],
       crawlLinks: true,
       failOnError: false,
     },
