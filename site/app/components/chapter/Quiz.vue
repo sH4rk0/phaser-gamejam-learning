@@ -6,12 +6,12 @@
     <div class="px-6 py-4 border-b border-white/10 flex items-center gap-3">
       <UIcon name="i-heroicons-academic-cap" class="w-6 h-6" style="color: var(--color-primary);" />
       <h2 class="text-lg font-bold" style="font-family: 'Orbitron', sans-serif; color: var(--color-text);">
-        Quiz di Autovalutazione
+        {{ locale === 'en' ? 'Self-Assessment Quiz' : 'Quiz di Autovalutazione' }}
       </h2>
     </div>
 
     <div class="p-6 space-y-8">
-      <div v-for="(q, qi) in questions" :key="qi" class="space-y-3">
+      <div v-for="(q, qi) in activeQuestions" :key="qi" class="space-y-3">
         <p class="font-semibold" style="color: var(--color-text);">
           {{ qi + 1 }}. {{ q.question }}
         </p>
@@ -21,7 +21,7 @@
             v-for="(opt, oi) in q.options"
             :key="oi"
             class="w-full text-left px-4 py-3 rounded-lg border text-sm transition-all"
-            :class="optionClass(qi, oi)"
+            :class="optionClass(qi, oi, opt.correct)"
             :disabled="submitted"
             @click="selectAnswer(qi, oi)"
           >
@@ -32,15 +32,15 @@
               >
                 {{ String.fromCharCode(65 + oi) }}
               </span>
-              <span>{{ opt }}</span>
+              <span>{{ opt.answer }}</span>
               <UIcon
-                v-if="submitted && oi === q.correct"
+                v-if="submitted && opt.correct"
                 name="i-heroicons-check"
                 class="w-4 h-4 ml-auto"
                 style="color: #10B981;"
               />
               <UIcon
-                v-else-if="submitted && answers[qi] === oi && oi !== q.correct"
+                v-else-if="submitted && answers[qi] === oi && !opt.correct"
                 name="i-heroicons-x-mark"
                 class="w-4 h-4 ml-auto"
                 style="color: #EF4444;"
@@ -53,12 +53,14 @@
 
     <div class="px-6 py-4 border-t border-white/10 flex items-center justify-between">
       <div v-if="submitted" class="text-sm" style="color: var(--color-muted);">
-        Punteggio:
-        <span class="font-bold" :style="{ color: scoreColor }">{{ score }}/{{ questions.length }}</span>
-        <span v-if="isPerfect" class="ml-2" style="color: var(--color-primary);">🎉 Perfetto!</span>
+        {{ locale === 'en' ? 'Score:' : 'Punteggio:' }}
+        <span class="font-bold" :style="{ color: scoreColor }">{{ score }}/{{ activeQuestions.length }}</span>
+        <span v-if="isPerfect" class="ml-2" style="color: var(--color-primary);">
+          🎉 {{ locale === 'en' ? 'Perfect!' : 'Perfetto!' }}
+        </span>
       </div>
       <div v-else class="text-sm" style="color: var(--color-muted);">
-        {{ answeredCount }}/{{ questions.length }} risposte
+        {{ answeredCount }}/{{ activeQuestions.length }} {{ locale === 'en' ? 'answers' : 'risposte' }}
       </div>
 
       <div class="flex gap-3">
@@ -69,15 +71,15 @@
           color="neutral"
           @click="reset"
         >
-          Riprova
+          {{ locale === 'en' ? 'Try again' : 'Riprova' }}
         </UButton>
         <UButton
           v-if="!submitted"
-          :disabled="answeredCount < questions.length"
+          :disabled="answeredCount < activeQuestions.length"
           size="sm"
           @click="submit"
         >
-          Verifica risposte
+          {{ locale === 'en' ? 'Check answers' : 'Verifica risposte' }}
         </UButton>
       </div>
     </div>
@@ -85,28 +87,65 @@
 </template>
 
 <script setup lang="ts">
-import type { QuizQuestion } from '~/data/quiz/chapter-1'
+import type { QuizData } from '~/data/quiz/types'
+
+interface ActiveQuestion {
+  question: string
+  options: { answer: string; correct: boolean }[]
+}
 
 const props = defineProps<{
-  questions: QuizQuestion[]
+  quizData: QuizData
+  locale: string
   chapterSlug: string
 }>()
 
 const { saveScore } = useQuizState()
-
 const answers = ref<Record<number, number>>({})
 const submitted = ref(false)
+const activeQuestions = ref<ActiveQuestion[]>([])
+
+function shuffle<T>(arr: T[]): T[] {
+  const a = [...arr]
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[a[i], a[j]] = [a[j], a[i]]
+  }
+  return a
+}
+
+function buildQuestions() {
+  const pool = props.quizData[props.locale as 'it' | 'en'] ?? props.quizData.it
+  const picked = shuffle([...pool]).slice(0, 5)
+  activeQuestions.value = picked.map(q => ({
+    question: q.question,
+    options: shuffle([...q.options]),
+  }))
+}
+
+onMounted(() => {
+  buildQuestions()
+})
+
+function reset() {
+  answers.value = {}
+  submitted.value = false
+  buildQuestions()
+}
 
 const answeredCount = computed(() => Object.keys(answers.value).length)
 
 const score = computed(() =>
-  props.questions.reduce((acc, q, qi) => acc + (answers.value[qi] === q.correct ? 1 : 0), 0),
+  activeQuestions.value.reduce((acc, q, qi) => {
+    const selected = answers.value[qi] !== undefined ? q.options[answers.value[qi]] : null
+    return acc + (selected?.correct ? 1 : 0)
+  }, 0),
 )
 
-const isPerfect = computed(() => score.value === props.questions.length)
+const isPerfect = computed(() => score.value === activeQuestions.value.length)
 
 const scoreColor = computed(() => {
-  const pct = score.value / props.questions.length
+  const pct = score.value / activeQuestions.value.length
   if (pct >= 0.8) return '#10B981'
   if (pct >= 0.5) return '#F59E0B'
   return '#EF4444'
@@ -120,17 +159,11 @@ function selectAnswer(qi: number, oi: number) {
 
 function submit() {
   submitted.value = true
-  saveScore(props.chapterSlug, score.value, props.questions.length)
+  saveScore(props.chapterSlug, score.value, activeQuestions.value.length)
 }
 
-function reset() {
-  answers.value = {}
-  submitted.value = false
-}
-
-function optionClass(qi: number, oi: number): Record<string, boolean> {
+function optionClass(qi: number, oi: number, isCorrect: boolean): Record<string, boolean> {
   const selected = answers.value[qi] === oi
-  const correct = props.questions[qi].correct === oi
 
   if (!submitted.value) {
     return {
@@ -141,9 +174,9 @@ function optionClass(qi: number, oi: number): Record<string, boolean> {
   }
 
   return {
-    'border-green-500/50 bg-green-500/10': correct,
-    'border-red-500/50 bg-red-500/10': selected && !correct,
-    'border-white/10': !selected && !correct,
+    'border-green-500/50 bg-green-500/10': isCorrect,
+    'border-red-500/50 bg-red-500/10': selected && !isCorrect,
+    'border-white/10': !selected && !isCorrect,
     'cursor-not-allowed': true,
   }
 }

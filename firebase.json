@@ -7,6 +7,12 @@
       "**/node_modules/**"
     ],
     "cleanUrls": true,
-    "trailingSlash": false
+    "trailingSlash": false,
+    "redirects": [
+      { "source": "/", "destination": "/it", "type": 302 },
+      { "source": "/risorse", "destination": "/it/risorse", "type": 302 },
+      { "source": "/capitoli", "destination": "/it/capitoli", "type": 302 },
+      { "source": "/capitoli/:slug", "destination": "/it/capitoli/:slug", "type": 302 }
+    ]
   }
 }

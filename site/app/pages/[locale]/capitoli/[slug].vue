@@ -38,7 +38,8 @@
 
         <ChapterQuiz
           v-if="quiz"
-          :questions="quiz"
+          :quiz-data="quiz"
+          :locale="locale"
           :chapter-slug="slug"
         />
 
@@ -74,7 +75,7 @@ import { quiz4 } from '~/data/quiz/chapter-4'
 import { quiz5 } from '~/data/quiz/chapter-5'
 import { quiz6 } from '~/data/quiz/chapter-6'
 import { quiz7 } from '~/data/quiz/chapter-7'
-import type { QuizQuestion } from '~/data/quiz/chapter-1'
+import type { QuizData } from '~/data/quiz/types'
 
 const route = useRoute()
 const { locale } = useLocale()
@@ -169,8 +170,7 @@ onUnmounted(() => {
   _observer?.disconnect()
 })
 
-// Quiz is only available in Italian for now
-const quizMap: Record<string, QuizQuestion[]> = {
+const quizMap: Record<string, QuizData> = {
   '1-introduzione': quiz1,
   '2-il-template': quiz2,
   '3-typescript-basi': quiz3,
@@ -180,7 +180,7 @@ const quizMap: Record<string, QuizQuestion[]> = {
   '7-camera': quiz7,
 }
 
-const quiz = computed(() => locale.value === 'it' ? (quizMap[slug.value] ?? null) : null)
+const quiz = computed(() => quizMap[slug.value] ?? null)
 
 useSeoMeta({
   title: () => `${chapterMeta.value?.title ?? 'Chapter'} — Phaser 4 Game Dev`,

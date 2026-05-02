@@ -36,6 +36,13 @@
           <ContentRenderer :value="chapter" />
         </div>
 
+        <ChapterQuiz
+          v-if="quiz"
+          :quiz-data="quiz"
+          locale="en"
+          :chapter-slug="slug"
+        />
+
         <ChapterNav :current-slug="slug" />
       </template>
 
@@ -61,6 +68,14 @@
 
 <script setup lang="ts">
 import { getChapterBySlug, getSlugForLocale } from '~/data/chapters'
+import { quiz1 } from '~/data/quiz/chapter-1'
+import { quiz2 } from '~/data/quiz/chapter-2'
+import { quiz3 } from '~/data/quiz/chapter-3'
+import { quiz4 } from '~/data/quiz/chapter-4'
+import { quiz5 } from '~/data/quiz/chapter-5'
+import { quiz6 } from '~/data/quiz/chapter-6'
+import { quiz7 } from '~/data/quiz/chapter-7'
+import type { QuizData } from '~/data/quiz/types'
 
 const route = useRoute()
 const { locale } = useLocale()
@@ -154,6 +169,18 @@ onMounted(() => {
 onUnmounted(() => {
   _observer?.disconnect()
 })
+
+const quizMap: Record<string, QuizData> = {
+  '1-introduction': quiz1,
+  '2-the-template': quiz2,
+  '3-typescript-basics': quiz3,
+  '4-game-configuration': quiz4,
+  '5-1-gameobjects-intro': quiz5,
+  '6-1-animations': quiz6,
+  '7-camera': quiz7,
+}
+
+const quiz = computed(() => quizMap[slug.value] ?? null)
 
 useSeoMeta({
   title: () => `${chapterMeta.value?.title ?? 'Chapter'} — Phaser 4 Game Dev`,
