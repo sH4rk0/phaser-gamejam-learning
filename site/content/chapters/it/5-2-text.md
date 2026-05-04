@@ -52,6 +52,11 @@ Limita la larghezza del testo in pixel, mandando a capo automaticamente le righe
 this._helloWorld.setWordWrapWidth(500);
 ```
 
+::PhaserExample{src="/?example=6" title="Hello World — text, stroke, shadow, setText" :height="400" code="https://github.com/sH4rk0/pgj/blob/main/2026-2027/Template/src/scenes/GameOver.ts"}
+::
+
+
+
 ::PhaserLabsBox{url="https://labs.phaser.io/?path=game+objects%2Ftext"}
 ::
 

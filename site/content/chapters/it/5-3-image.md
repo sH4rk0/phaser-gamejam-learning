@@ -26,6 +26,10 @@ images: [
 La key usata nel Preloader deve coincidere con quella usata in `this.add.image()`. Per convenzione è buona prassi usare lo stesso nome del file.
 ::
 
+::PhaserExample{src="/?example=3" title="Hello World — text, stroke, shadow, setText" :height="400" }
+::
+
+
 ::PhaserLabsBox{url="https://labs.phaser.io/?path=game+objects%2Fimages"}
 ::
 

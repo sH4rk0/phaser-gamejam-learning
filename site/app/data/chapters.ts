@@ -27,6 +27,7 @@ const chapters_it: Chapter[] = [
   { id: 9, slug: '9-gameobjects-specializzati', title: 'I Nostri GameObjects Specializzati', difficulty: 'intermediate', readingTime: '~35 min', available: true },
   { id: 10, slug: '10-tilemaps', title: 'Tilemaps', difficulty: 'intermediate', readingTime: '~40 min', available: true },
   { id: 11, slug: '11-input', title: 'Input Handling', difficulty: 'intermediate', readingTime: '~25 min', available: true },
+  { id: 12, slug: '12-particles', title: 'Particle System', difficulty: 'intermediate', readingTime: '~30 min', available: true },
 ]
 
 const chapters_en: Chapter[] = [
@@ -49,6 +50,7 @@ const chapters_en: Chapter[] = [
   { id: 9, slug: '9-specialized-gameobjects', title: 'Our Custom GameObjects', difficulty: 'intermediate', readingTime: '~35 min', available: true },
   { id: 10, slug: '10-tilemaps', title: 'Tilemaps', difficulty: 'intermediate', readingTime: '~40 min', available: true },
   { id: 11, slug: '11-input', title: 'Input Handling', difficulty: 'intermediate', readingTime: '~25 min', available: true },
+  { id: 12, slug: '12-particles', title: 'Particle System', difficulty: 'intermediate', readingTime: '~30 min', available: true },
 ]
 
 // Maps IT slug → EN slug

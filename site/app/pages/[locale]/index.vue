@@ -182,6 +182,34 @@
       </div>
     </section>
 
+    <!-- Live examples preview -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div class="text-center mb-8">
+        <p
+          class="text-xs font-bold tracking-widest uppercase mb-3"
+          style="color: var(--color-primary); font-family: 'Orbitron', sans-serif;"
+        >
+          {{ t.examplesLabel }}
+        </p>
+        <h2
+          class="text-2xl font-bold mb-3"
+          style="font-family: 'Orbitron', sans-serif; color: var(--color-text);"
+        >
+          {{ t.examplesTitle }}
+        </h2>
+        <p class="max-w-xl mx-auto text-sm" style="color: var(--color-muted);">
+          {{ t.examplesDesc }}
+        </p>
+      </div>
+      <div style="max-width: 60%; margin: 0 auto;">
+        <PhaserExample
+          src="/?example=1"
+          :title="t.examplesBoxTitle"
+          
+        />
+      </div>
+    </section>
+
     <!-- Tech stack badges -->
     <section
       class="border-t border-white/10 py-12"
@@ -227,6 +255,10 @@ const t = computed(() => locale.value === 'en' ? {
     { icon: 'i-heroicons-trophy', value: 'Quiz', label: 'per chapter' },
     { icon: 'i-heroicons-currency-dollar', value: 'Free', label: 'Completely free' },
   ],
+  examplesLabel: 'Live Examples',
+  examplesTitle: 'See the code in action',
+  examplesDesc: 'Each chapter includes interactive examples running directly in the browser.',
+  examplesBoxTitle: 'Live example — Phaser 4',
 } : {
   headline: 'CREA IL TUO VIDEOGAME',
   subtitle: 'con PhaserJs e TypeScript',
@@ -243,6 +275,10 @@ const t = computed(() => locale.value === 'en' ? {
     { icon: 'i-heroicons-trophy', value: 'Quiz', label: 'per ogni capitolo' },
     { icon: 'i-heroicons-currency-dollar', value: 'Free', label: 'Completamente gratuito' },
   ],
+  examplesLabel: 'Esempi Live',
+  examplesTitle: 'Vedi il codice in azione',
+  examplesDesc: 'Ogni capitolo include esempi interattivi che girano direttamente nel browser.',
+  examplesBoxTitle: 'Esempio live — Phaser 4',
 })
 
 useSeoMeta({

@@ -75,6 +75,7 @@ import { quiz4 } from '~/data/quiz/chapter-4'
 import { quiz5 } from '~/data/quiz/chapter-5'
 import { quiz6 } from '~/data/quiz/chapter-6'
 import { quiz7 } from '~/data/quiz/chapter-7'
+import { quiz12 } from '~/data/quiz/chapter-12'
 import type { QuizData } from '~/data/quiz/types'
 
 const route = useRoute()
@@ -178,6 +179,7 @@ const quizMap: Record<string, QuizData> = {
   '5-1-gameobjects-intro': quiz5,
   '6-1-animazioni': quiz6,
   '7-camera': quiz7,
+  '12-particles': quiz12,
 }
 
 const quiz = computed(() => quizMap[slug.value] ?? null)
