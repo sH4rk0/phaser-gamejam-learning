@@ -241,7 +241,7 @@ const tutorTags = ['TypeScript', 'Phaser.js', 'Game Development', 'Node.js', 'Ma
 
 const t = computed(() => locale.value === 'en' ? {
   headline: 'CREATE YOUR VIDEOGAME',
-  subtitle: 'with PhaserJs and TypeScript',
+  subtitle: 'with PhaserJs v4 and TypeScript',
   description: 'Promoted by <strong>I.I.S. Margherita Hack</strong> in collaboration with <strong>HackFarm E.T.S.</strong><br>The course is an integral part of the <a href="https://phaser-gamejam.web.app" target="_blank" rel="noopener noreferrer"><strong>Phaser GameJam</strong></a>.',
   ctaButton: '🎮 Explore the Course →',
   tutorLabel: 'The tutor',
@@ -261,7 +261,7 @@ const t = computed(() => locale.value === 'en' ? {
   examplesBoxTitle: 'Live example — Phaser 4',
 } : {
   headline: 'CREA IL TUO VIDEOGAME',
-  subtitle: 'con PhaserJs e TypeScript',
+  subtitle: 'con PhaserJs v4 e TypeScript',
   description: 'Promosso dall\'<strong>I.I.S. Margherita Hack</strong> in collaborazione con <strong>HackFarm E.T.S.</strong><br>Il corso è parte integrante della <a href="https://phaser-gamejam.web.app" target="_blank" rel="noopener noreferrer"><strong>Phaser GameJam</strong></a>.',
   ctaButton: '🎮 Esplora il Corso →',
   tutorLabel: 'Il tutor',
